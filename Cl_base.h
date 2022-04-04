@@ -25,7 +25,7 @@ public:
 	Cl_base(string objectName, Cl_base* parentPtr = nullptr);
 
 	//Сетеры
-	void setName(string name);
+	void setName(string objectName);
 	void setParent(Cl_base* parentPtr);
 
 	//Гетеры
@@ -33,7 +33,7 @@ public:
 	string getName();
 
 	//Получение указателя на объект через его имя
-	Cl_base* getObjectPtr(string name);
+	Cl_base* getObjectPtr(string objectName);
 
 	//Вывод дерева объектов
 	void printTree();
