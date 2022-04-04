@@ -52,9 +52,10 @@ Cl_base* Cl_base::getObjectPtr(string objectName)
 	*  указатель на объект, который был последним в вызове рекурсии. */
 	for (size_t i = 0; i < childrenList.size(); i++)
 	{
-		if (childrenList[i]->getObjectPtr(objectName)->getName() == objectName)
+		Cl_base* tmp = childrenList[i]->getObjectPtr(objectName);
+		if (tmp->getName() == objectName)
 		{
-			return childrenList[i]->getObjectPtr(objectName);
+			return tmp;
 		}
 	}
 
