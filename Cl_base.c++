@@ -11,13 +11,11 @@ Cl_base::Cl_base(string objectName, Cl_base* parentPtr)
 	if (parentPtr)
 	{
 		setParent(parentPtr);
-		parentPtr->childrenList.push_back(this);
 	}
 	else
 	{
 		//Привязываем объект как головной (дочерний объект прородителя)
 		setParent(root);
-		root->childrenList.push_back(this);
 	}
 }
 
@@ -29,7 +27,25 @@ void Cl_base::setName(string objectName)
 
 //Сетер родителя
 void Cl_base::setParent(Cl_base* parentPtr)
-{
+{	
+	/*Действие только в случае, если указатель родителя не null,
+	* т.е если метод вызван к не корневому объекту */
+	if (parentPtr)
+	{
+		const size_t size = parentPtr->childrenList.size();
+		/*Цикл, который проходит по списку детей родительского объекта
+		* и удаляет из этого списка объект, который перестал подчиняться родительскому */
+		for (size_t i = 0; i < size; i++)
+		{
+			if (parentPtr->childrenList[i] == this)
+			{
+				parentPtr->childrenList.erase(parentPtr->childrenList.begin() + i);
+				break;
+			}
+		}
+		//Добавление в родительский список детей указатель на текущ.объект
+		parentPtr->childrenList.push_back(this);
+	}
 	this->parentPtr = parentPtr;
 }
 
@@ -52,10 +68,9 @@ Cl_base* Cl_base::getObjectPtr(string objectName)
 	*  указатель на объект, который был последним в вызове рекурсии. */
 	for (size_t i = 0; i < childrenList.size(); i++)
 	{
-		Cl_base* tmp = childrenList[i]->getObjectPtr(objectName);
-		if (tmp->getName() == objectName)
+		if (childrenList[i]->getObjectPtr(objectName)->getName() == objectName)
 		{
-			return tmp;
+			return childrenList[i]->getObjectPtr(objectName);
 		}
 	}
 

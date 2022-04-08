@@ -1,4 +1,5 @@
 #include "Cl_application.h"
+#include "Cl_branch.h"
 
 Cl_application::Cl_application(Cl_base* parentPtr)
 {
@@ -25,7 +26,7 @@ void Cl_application::buildTree()
 		}
 
 		// Создание дочернего объекта
-		Cl_base* child = new Cl_base(childName, root->getObjectPtr(parentName));
+		Cl_base* child = new Cl_branch(childName, root->getObjectPtr(parentName));
 	}
 }
 

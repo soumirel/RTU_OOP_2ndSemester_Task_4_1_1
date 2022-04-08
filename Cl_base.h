@@ -1,5 +1,4 @@
-#ifndef CL_BASE_H
-#define CL_BASE_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -33,10 +32,8 @@ public:
 	string getName();
 
 	//Получение указателя на объект через его имя
-	Cl_base* getObjectPtr(string objectName);
+	Cl_base* getObjectPtr(string name);
 
 	//Вывод дерева объектов
 	void printTree();
 };
-
-#endif

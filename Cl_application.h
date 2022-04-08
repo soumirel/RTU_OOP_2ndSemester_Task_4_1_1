@@ -1,5 +1,4 @@
-#ifndef CL_APPLICATION_H
-#define CL_APPLICATION_H
+#pragma once
 
 #include  "Cl_base.h"
 
@@ -15,5 +14,3 @@ public:
 	int execApp();
 
 };
-
-#endif
